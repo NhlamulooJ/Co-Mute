@@ -1,0 +1,106 @@
+﻿@page "/home"
+@using ComuteClient.Models
+@using ComuteClient.Controllers
+
+@inject CarpoolController _carpoolService;
+
+
+<MudTable Items="@carpools" Filter="new Func<Models.Carpool,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Carpool Opportunity</MudText>
+        <MudSpacer />
+     <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Departure Location</MudTh>
+        <MudTh>Destination</MudTh>
+        <MudTh>Departure Date</MudTh>
+        <MudTh>Arrival Date</MudTh>
+        <MudTh>Total Seats</MudTh>
+        <MudTh>Available Seats</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="DepartureOrigin">@context.DepartureOrigin</MudTd>
+        <MudTd DataLabel="Destination">@context.Destination</MudTd>
+        <MudTd DataLabel="DepartureTime">@context.DepartureTime</MudTd>
+        <MudTd DataLabel="ExpectedArrival">@context.ExpectedArrival</MudTd>
+        <MudTd DataLabel="AvailableSeats">@context.TotalSeats</MudTd>
+        <MudTd DataLabel="AvailableSeats">@context.AvailableSeats</MudTd>
+        <MudTh>
+            @if(context.ownerCarpools == null)
+            {
+                <form onsubmit="HandleSubmit()">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" typeof="submit">
+                        Join
+                    </MudButton>
+                </form>
+            }
+            else
+            {
+                @foreach (var x in context.ownerCarpools)
+                {
+                    if (x.UserId == loggedUserId)
+                    {
+                        joined = true;
+                        break;
+                    }
+                }
+                @if (joined == false)
+                {
+                    <form onsubmit="HandleSubmit()">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" typeof="submit">
+                            Join
+                        </MudButton>
+                    </form>
+                }
+                else
+                {
+                    <form onsubmit="HandleSubmit()">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" typeof="submit">
+                            Leave
+                        </MudButton>
+                    </form>
+                }
+            }
+
+        </MudTh>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+@code {
+    List<Models.Carpool> carpools;
+    int loggedUserId = 2;
+    bool joined = false;
+    private string searchString1 = "";
+    private Models.Carpool selectedItem1 = null;
+    protected override async Task OnInitializedAsync()
+    {
+        carpools = await _carpoolService.CarPools();
+        StateHasChanged();
+    }
+    //MudTable--Filter="new Func<Element,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1"
+    //MudTextField
+    private bool FilterFunc1(Models.Carpool element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(Models.Carpool element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.DepartureOrigin.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.Destination.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        //if ($"{element.Number} {element.Position} {element.Molar}".Contains(searchString))
+        //    return true;
+        return false;
+    }
+
+    private void HandleSubmit()
+    {
+        
+    }
+}

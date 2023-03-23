@@ -1,0 +1,50 @@
+﻿@page "/carpool/create"
+@using ComuteClient.Models
+@using ComuteClient.Controllers
+@inject CarpoolController _carpoolService;
+@inject NavigationManager _navManager;
+
+<EditForm Model="@carpool" OnValidSubmit="OnSubmit">
+<DataAnnotationsValidator/>
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudNumericField Label="Owner" HelperText="Owner"
+                                  @bind-Value="carpool.UserId" For="@(() => carpool.UserId)" />
+                    <MudTextField Label="Origin" HelperText="Enter place of origin"
+                                  @bind-Value="carpool.DepartureOrigin" For="@(() => carpool.DepartureOrigin)" />
+                    <MudTextField Label="Destination" Class="mt-3"
+                                  @bind-Value="carpool.Destination" For="@(() => carpool.Destination)" />
+                    <MudDatePicker Label="Departure Date" Class="mt-3"
+                                   @bind-Date="carpool.DepartureTime" For="@(() => carpool.DepartureTime)"  />
+                    <MudDatePicker Label="Expected Arrival" Class="mt-3"
+                                   @bind-Date="carpool.ExpectedArrival" For="@(() => carpool.ExpectedArrival)"  />
+                    <MudNumericField Label="Total Seats" Class="mt-3"
+                                   @bind-Value="carpool.TotalSeats" For="@(() => carpool.TotalSeats)" />
+                    <MudNumericField Label="Available Seats" Class="mt-3"
+                                     @bind-Value="carpool.AvailableSeats" For="@(() => carpool.AvailableSeats)" />
+                    <MudNumericField Label="Days Available" Class="mt-3"
+                                     @bind-Value="carpool.DaysAvailable" For="@(() => carpool.DaysAvailable)" />
+                    <MudTextField Label="Carpool notes" Class="mt-3" Lines="5"
+                                  @bind-Value="carpool.Notes" For="@(() => carpool.Notes)" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Submit</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+
+@code {
+    Carpool carpool = new Carpool();
+    protected async void OnSubmit()
+    {
+      
+        _carpoolService.Create(carpool);
+        _navManager.NavigateTo("/carpool/list");
+
+    }
+}

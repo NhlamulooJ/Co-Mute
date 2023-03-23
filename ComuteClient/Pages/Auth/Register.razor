@@ -1,0 +1,39 @@
+﻿@page "/auth/register"
+@using ComuteClient.Models
+@using ComuteClient.Controllers
+@inject AuthController _authService;
+@inject NavigationManager _navManager;
+
+<EditForm Model="@user" OnValidSubmit="RegisterUser">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Name"
+                                  @bind-Value="user.Name" For="@(() => user.Name)" />
+                    <MudTextField Label="Surname"  Class="mt-3"
+                                  @bind-Value="user.Surname" For="@(() => user.Surname)" />
+                    <MudTextField Label="Email" 
+                                  @bind-Value="user.Email" For="@(() => user.Email)" />
+                    <MudTextField Label="Password"  Class="mt-3"
+                                  @bind-Value="user.Password" For="@(() => user.Password)" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+
+@code {
+    User user = new User();
+    protected async void RegisterUser()
+    {
+        await _authService.Register(user);
+        _navManager.NavigateTo("/");
+
+    }
+}

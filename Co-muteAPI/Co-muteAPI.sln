@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Co-muteAPI", "Co-muteAPI.csproj", "{9356B660-CB06-4F21-A14B-CD39E99F1D9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Co-MuteDB", "..\Co-MuteDB\Co-MuteDB.csproj", "{53AF8BFF-AFF7-4463-A583-CB7732A0322F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Co-MuteBL", "..\Co-MuteBL\Co-MuteBL.csproj", "{070B5E8D-9A9F-42D2-996F-F9E70AA36250}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComuteClient", "..\ComuteClient\ComuteClient.csproj", "{0A2B9AB4-627C-4974-BADA-D31CA5E0F973}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9356B660-CB06-4F21-A14B-CD39E99F1D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9356B660-CB06-4F21-A14B-CD39E99F1D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9356B660-CB06-4F21-A14B-CD39E99F1D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9356B660-CB06-4F21-A14B-CD39E99F1D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53AF8BFF-AFF7-4463-A583-CB7732A0322F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53AF8BFF-AFF7-4463-A583-CB7732A0322F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53AF8BFF-AFF7-4463-A583-CB7732A0322F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53AF8BFF-AFF7-4463-A583-CB7732A0322F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{070B5E8D-9A9F-42D2-996F-F9E70AA36250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070B5E8D-9A9F-42D2-996F-F9E70AA36250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{070B5E8D-9A9F-42D2-996F-F9E70AA36250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070B5E8D-9A9F-42D2-996F-F9E70AA36250}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A2B9AB4-627C-4974-BADA-D31CA5E0F973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A2B9AB4-627C-4974-BADA-D31CA5E0F973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A2B9AB4-627C-4974-BADA-D31CA5E0F973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A2B9AB4-627C-4974-BADA-D31CA5E0F973}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {306662BA-1A1D-4AF2-8F06-F0EF3474E70F}
+	EndGlobalSection
+EndGlobal

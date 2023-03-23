@@ -1,0 +1,47 @@
+﻿@page "/"
+@using ComuteClient.Models
+@using ComuteClient.Controllers
+@inject AuthController _authService;
+@inject NavigationManager _navManager;
+
+<EditForm Model="@user" OnValidSubmit="LoginUser">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Email"
+                                  @bind-Value="user.Email" For="@(() => user.Email)" />
+                    <MudTextField Label="Password" Class="mt-3"
+                                  @bind-Value="user.Password" For="@(() => user.Password)" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Login</MudButton>
+                </MudCardActions>
+            </MudCard>
+            <div></div>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+<MudButton ButtonType="ButtonType.Submit" OnClick="Register" Variant="Variant.Filled" Color="Color.Secondary" Class="ml-auto">Register</MudButton>
+
+
+@code {
+    LoginViewModel user = new LoginViewModel();
+    protected async void LoginUser()
+    {
+        var response = await _authService.Login(user);
+        var message = " ";
+        if(response != null)
+        {
+            _navManager.NavigateTo("/home");
+        }
+        else message = "Incorrect Email Address or Password";
+    }
+
+    protected async void Register()
+    {
+        _navManager.NavigateTo("/auth/register");
+    }
+
+}
